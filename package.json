@@ -1,0 +1,61 @@
+{
+  "name": "sums",
+  "version": "0.1.0",
+  "description": "a file checksum generator",
+  "author": "Zab",
+  "license": "MIT",
+  "homepage": "https://github.com/zab/sums#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zab/sums.git"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "file",
+    "checksum",
+    "shasum",
+    "hash",
+    "sha1",
+    "sum"
+  ],
+  "files": [
+    "lib/",
+    "license",
+    "readme.md"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "test:lint": "standard --verbose | snazzy",
+    "test:unit": "mocha src/**/*.test.js -r babel-register -r babel-polyfill",
+    "test": "npm-run-all test:*",
+    "build": "rm -rf lib && babel src -d lib --no-comments --compact",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "6.16.0",
+    "babel-polyfill": "6.16.0",
+    "babel-preset-latest": "6.16.0",
+    "babel-register": "6.16.3",
+    "chai": "3.5.0",
+    "mocha": "3.1.2",
+    "mock-fs": "3.11.0",
+    "npm-run-all": "3.1.1",
+    "snazzy": "5.0.0",
+    "standard": "8.4.0"
+  },
+  "standard": {
+    "globals": [
+      "beforeEach",
+      "describe",
+      "it"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  }
+}

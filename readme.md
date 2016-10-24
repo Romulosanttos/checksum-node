@@ -14,8 +14,8 @@ $ npm install sums
 ## Getting Started
 
 ```javascript
-const fs = require('fs')
-const sums = require('sums')
+import fs from 'fs'
+import sums from 'sums'
 
 export default async function () {
   const stream = fs.createReadStream('path-to-file')

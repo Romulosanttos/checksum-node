@@ -1,7 +1,7 @@
 {
   "name": "sums",
   "version": "0.1.0",
-  "description": "a file checksum generator",
+  "description": "A checksum generator for Node streams",
   "author": "Zab",
   "license": "MIT",
   "homepage": "https://github.com/zab/sums#readme",

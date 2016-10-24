@@ -1,17 +1,31 @@
 import { expect } from 'chai'
+import fs from 'fs'
 import mockFs from 'mock-fs'
 import sums from './index'
 
-beforeEach(() => mockFs({
-  '/whatup.txt': new Buffer('hello'),
-  '/yo.txt': 'hi',
-  '/empty': ''
-}))
+describe('unit: sums', () => {
+  beforeEach(() => mockFs({
+    '/whatup': new Buffer('hello'),
+    '/empty': ''
+  }))
 
-describe('unit: index', () => {
-  it('hashes file', async () => {
-    expect(await sums('/whatup.txt')).to.equal('aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d')
-    expect(await sums('/yo.txt')).to.equal('c22b5f9178342609428d6f51b2c5af4c0bde6a42')
-    expect(await sums('/empty')).to.equal('da39a3ee5e6b4b0d3255bfef95601890afd80709')
+  it('gets sums of file', async () => {
+    expect(await sums('/whatup')).to.deep.equal({
+      sum: 'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d',
+      size: 5
+    })
+    expect(await sums('/empty')).to.deep.equal({
+      sum: 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+      size: 0
+    })
+    expect(() => sums({ hi: 'hey' })).to.throw
+  })
+
+  it('gets sums of stream', async () => {
+    expect(await sums(fs.createReadStream('/whatup'), 'js')).to.deep.equal({
+      sum: 'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d',
+      size: 5
+    })
+    expect(() => sums(fs.createReadStream('/whatup'))).to.throw
   })
 })

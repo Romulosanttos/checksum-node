@@ -1,27 +1,29 @@
 import fs from 'fs'
+import path from 'path'
 import crypto from 'crypto'
+import isStream from 'is-stream'
 
-module.exports = (filename, opts = {}) => {
-  opts.algorithm = opts.algorithm || 'sha1'
+module.exports = (stream) => {
+  if (typeof stream !== 'string' && !isStream(stream)) {
+    throw new TypeError(`stream must be a string or stream, got ${typeof stream}`)
+  }
 
   return new Promise((resolve, reject) => {
-    fs.stat(filename, (err, stat) => {
-      if (err) return reject(err)
+    stream = !isStream.readable(stream)
+      ? fs.createReadStream(path.resolve(stream))
+      : stream
 
-      if (!stat.isFile()) {
-        return reject(new Error(`${filename} is not a file!`))
-      }
+    let size = 0
+    stream.on('data', (chunk) => (size += Buffer.byteLength(chunk)))
 
-      const hash = crypto.createHash(opts.algorithm)
-      const fileStream = fs.createReadStream(filename)
+    const hash = crypto.createHash('sha1').setEncoding('hex')
+    stream.pipe(hash, { end: false })
 
-      hash.setEncoding('hex')
-      fileStream.pipe(hash, { end: false })
+    stream.on('end', () => {
+      hash.end()
 
-      fileStream.on('end', () => {
-        hash.end()
-        resolve(hash.read())
-      })
+      const sum = hash.read()
+      resolve({ size, sum })
     })
   })
 }

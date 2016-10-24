@@ -13,18 +13,21 @@
     "node": ">=4"
   },
   "keywords": [
-    "file",
     "checksum",
     "shasum",
     "hash",
     "sha1",
-    "sum"
+    "snapshot",
+    "filesize"
   ],
   "files": [
     "lib/",
     "license",
     "readme.md"
   ],
+  "bin": {
+    "sums": "bin/sums"
+  },
   "main": "lib/index.js",
   "scripts": {
     "test:lint": "standard --verbose | snazzy",
@@ -33,7 +36,11 @@
     "build": "rm -rf lib && babel src -d lib --no-comments --compact",
     "prepublish": "npm run build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "crypto-extra": "0.4.0",
+    "is-stream": "1.1.0",
+    "mime": "1.3.4"
+  },
   "devDependencies": {
     "babel-cli": "6.16.0",
     "babel-polyfill": "6.16.0",

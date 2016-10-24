@@ -14,15 +14,17 @@ $ npm install sums
 ## Getting Started
 
 ```javascript
+const fs = require('fs')
 const sums = require('sums')
 
-/* pass any kind of readable stream or a file path */
-sums('path-to-file').then(/* ... */)
-
-//= Promise => Object
+export default async function () {
+  const stream = fs.createReadStream('path-to-file')
+  return await sums(stream)
+}
 ```
 
 ```javascript
+/* example response */
 {
   sum: '7c3af16fe22fcb5f79dcd7cae12cf15cb91150c8',
   size: 1070
@@ -45,7 +47,7 @@ Size:  1070
 
 #### sums(stream:Stream or file:String)
 
-Generate a sum of the stream or file. Accepts either a filename (will be read as a stream), or any other kind of readable stream.
+Generate a sum of the stream or file. Accepts any kind of readable stream, or a filename (will be read as a stream).
 
 > Type: `Stream` or `string`  
 > Required: yes

@@ -13,6 +13,7 @@
     "node": ">=4"
   },
   "keywords": [
+    "stream",
     "checksum",
     "shasum",
     "hash",
@@ -34,6 +35,7 @@
     "test:unit": "mocha src/**/*.test.js -r babel-register -r babel-polyfill",
     "test": "npm-run-all test:*",
     "build": "rm -rf lib && babel src -d lib --no-comments --compact",
+    "watch": "npm run build -- -w",
     "prepublish": "npm run build"
   },
   "dependencies": {

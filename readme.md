@@ -14,10 +14,10 @@ $ npm install sums
 ## Getting Started
 
 ```javascript
-import fs from 'fs'
-import sums from 'sums'
+const fs = require('fs')
+const sums = require('sums')
 
-export default async function () {
+async function () {
   const stream = fs.createReadStream('path-to-file')
   return await sums(stream)
 }

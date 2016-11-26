@@ -10,7 +10,7 @@ describe('unit: compress', () => {
     expect(res.file).to.match(/\.gz$/)
     expect(res.old_size).to.equal(269883)
     expect(res.new_size).to.equal(266862)
-    expect(res.defalted).to.equal('1.1%')
+    expect(res.deflated).to.equal('1.1%')
     expect(fs.existsSync(res.file)).to.be.true
   })
 })

@@ -7,7 +7,7 @@ describe('unit: compress', () => {
   it('runs with a jpg', async () => {
     const stream = fs.createReadStream(path.resolve(__dirname, '../test/photo.jpg'))
     const res = await compress(stream)
-    expect(res.file).to.match(/^\/var\/folders/)
+    expect(res.file).to.match(/\.gz$/)
     expect(res.type).to.equal('image/jpeg')
     expect(res.old_size).to.equal(269883)
     expect(res.new_size).to.equal(266862)

@@ -27,13 +27,13 @@ export default async function (rstream) {
   })
 
   const stat = await getFileStats(tmpFile)
-  const ratio = await getCompressionRatio(size, stat.size)
+  const savings = await getCompressionSavings(size, stat.size)
 
   return {
     file: tmpFile,
     old_size: size,
     new_size: stat.size,
-    ratio
+    savings
   }
 }
 
@@ -60,10 +60,10 @@ function getFileStats (file) {
   })
 }
 
-function getCompressionRatio (oldSize, newSize) {
+function getCompressionSavings (oldSize, newSize) {
   oldSize = parseInt(oldSize, 10)
   newSize = parseInt(newSize, 10)
 
-  const ratio = 100 - ((newSize * 100) / oldSize)
-  return `${ratio.toFixed(1)}%`
+  const savings = 100 - ((newSize * 100) / oldSize)
+  return `${savings.toFixed(1)}%`
 }

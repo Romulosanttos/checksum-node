@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/zab/sums.svg?branch=master)](https://travis-ci.org/zab/sums)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-A Node library to quickly generate SHA1 checksums of streams. Returns a promise resolving with a checksum of the stream data and the size of the stream in bytes. Can also compress a stream, and get the checksum of a compressed stream.
+A Node library to quickly generate checksums of streams and compressed streams. Returns a promise resolving with a checksum of the stream data and the size in bytes. Can also compress a stream using gzip.
 
 ## Install
 
@@ -61,7 +61,6 @@ $ sums [path-to-file]
 ```
 
 ```bash
-Analyzing [path-to-file]...
 Sum:   7c3af16fe22fcb5f79dcd7cae12cf15cb91150c8
 Size:  1070
 ```
@@ -72,19 +71,13 @@ Size:  1070
 
 Generate a SHA1 checksum of a stream. Can pass in a gzip compressed file if `compressed` is set to true, and will return the checksum of the decompressed version.
 
-> Type: `Stream`
-> Required: yes
-
 - `options`
-  - `compressed` Whether the stream is gzip compressed (will automatically decompress)
   - `algorithm` The hashing algorithm used to generate checksum (defaults to SHA1)
+  - `compressed` Whether the stream is gzip compressed (will automatically decompress)
 
 #### sums.compress(stream:Stream)
 
 Will compress a stream using gzip and store in a temporary location.
-
-> Type: `Stream`
-> Required: yes
 
 ## License
 

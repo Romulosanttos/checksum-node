@@ -8,7 +8,6 @@ export default function () {
 
   checksum(fs.createReadStream(file), isGz)
     .then(sum => {
-      console.log(`Analyzing ${file}...`)
       console.log('Sum:  ', sum.sum)
       console.log('Size: ', sum.size)
     })

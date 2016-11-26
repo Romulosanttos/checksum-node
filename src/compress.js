@@ -3,7 +3,7 @@ import fs from 'fs'
 import zlib from 'zlib'
 import tmp from 'tmp'
 import isStream from 'is-stream'
-import fileType from 'file-type'
+import through from 'through2'
 
 tmp.setGracefulCleanup()
 
@@ -14,14 +14,13 @@ export default async function (rstream) {
   const tmpFile = await getTempFile()
   const wstream = fs.createWriteStream(tmpFile)
 
-  let type
   let size = 0
-  rstream.on('data', buf => {
-    if (!type) type = fileType(buf)
-    size += Buffer.byteLength(buf)
+  const getSize = through((chunk, enc, cb) => {
+    size += Buffer.byteLength(chunk)
+    cb(null, chunk)
   })
 
-  rstream.pipe(gzip).pipe(wstream)
+  rstream.pipe(getSize).pipe(gzip).pipe(wstream)
   await new Promise((resolve, reject) => {
     wstream.on('error', reject)
     wstream.on('finish', resolve)
@@ -32,7 +31,6 @@ export default async function (rstream) {
 
   return {
     file: tmpFile,
-    type: type.mime,
     old_size: size,
     new_size: stat.size,
     ratio

@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/zab/sums.svg?branch=master)](https://travis-ci.org/zab/sums)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-A library to quickly generate SHA1 checksums of Node streams. Returns a promise resolving with a checksum of the stream data and the size of the stream in bytes.
+A Node library to quickly generate SHA1 checksums of streams. Returns a promise resolving with a checksum of the stream data and the size of the stream in bytes. Can also compress a stream, and get the checksum of the compressed data later.
 
 ## Install
 
@@ -19,7 +19,7 @@ const sums = require('sums')
 
 async function () {
   const stream = fs.createReadStream('path-to-file')
-  return await sums(stream)
+  return await sums.checksum(stream)
 }
 ```
 
@@ -45,11 +45,18 @@ Size:  1070
 
 ## API
 
-#### sums(stream:Stream or file:String)
+#### sums.checksum(stream:Stream, compressed:Boolean)
 
-Generate a sum of the stream or file. Accepts any kind of readable stream, or a filename (will be read as a stream).
+Generate a SHA1 checksum of a stream. Can pass in a gzip compressed file if `compressed` is set to true, and will return the checksum of the decompressed version.
 
-> Type: `Stream` or `string`  
+> Type: `Stream`
+> Required: yes
+
+#### sums.compress(stream:Stream)
+
+Will compress a stream using gzip and store in a temporary location.
+
+> Type: `Stream`
 > Required: yes
 
 ## License

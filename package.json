@@ -26,6 +26,7 @@
     "gunzip"
   ],
   "files": [
+    "bin/",
     "lib/",
     "license",
     "readme.md"

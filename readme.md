@@ -49,7 +49,7 @@ async function () {
   file: '/var/folders/tb/dsyr2qf50lz4grxc63xqlvd40000gn/T/sums_47909VYt2yM20EE5f.gz',
   old_size: 269883,
   new_size: 266862,
-  savings: '1.1%'
+  deflated: '1.1%'
 }
 ```
 

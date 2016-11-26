@@ -68,12 +68,16 @@ Size:  1070
 
 ## API
 
-#### sums.checksum(stream:Stream, compressed:Boolean)
+#### sums.checksum(stream:Stream, options:Object)
 
 Generate a SHA1 checksum of a stream. Can pass in a gzip compressed file if `compressed` is set to true, and will return the checksum of the decompressed version.
 
 > Type: `Stream`
 > Required: yes
+
+- `options`
+  - `compressed` Whether the stream is gzip compressed (will automatically decompress)
+  - `algorithm` The hashing algorithm used to generate checksum (defaults to SHA1)
 
 #### sums.compress(stream:Stream)
 

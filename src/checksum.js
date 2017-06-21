@@ -1,12 +1,12 @@
 import assert from 'assert'
-import zlib from 'zlib'
 import crypto from 'crypto'
 import isStream from 'is-stream'
-import sconcat from 'concat-stream'
+import concatStream from 'concat-stream'
 import through from 'through2'
 
 export default async function (rstream, opts = {}) {
-  assert(isStream.readable(rstream), 'Must pass a readable stream!')
+  assert(isStream.readable(rstream),
+    'Must pass a readable stream!')
 
   let size = 0
   const getSize = through((chunk, enc, cb) => {
@@ -15,17 +15,15 @@ export default async function (rstream, opts = {}) {
   })
 
   const sum = await new Promise((resolve, reject) => {
-    const hash = crypto.createHash(opts.algorithm || 'sha1').setEncoding('hex')
+    const algo = opts.algorithm || 'sha1'
+    const hash = crypto.createHash(algo).setEncoding('hex')
 
     rstream.on('error', reject)
-
-    if (opts.compressed) {
-      const gunzip = zlib.createGunzip()
-      rstream.pipe(gunzip).pipe(getSize).pipe(hash).pipe(sconcat(resolve))
-    } else {
-      rstream.pipe(getSize).pipe(hash).pipe(sconcat(resolve))
-    }
+    rstream.pipe(getSize).pipe(hash).pipe(concatStream(resolve))
   })
 
-  return { sum, size }
+  return {
+    sum,
+    size
+  }
 }

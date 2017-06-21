@@ -2,15 +2,15 @@
   "name": "sums",
   "version": "0.2.4",
   "description": "A checksum generator for Node streams",
-  "author": "Zab",
+  "author": "Jason Maurer",
   "license": "MIT",
-  "homepage": "https://github.com/zab/sums#readme",
+  "homepage": "https://github.com/jsonmaur/sums#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zab/sums.git"
+    "url": "git+https://github.com/jsonmaur/sums.git"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "keywords": [
     "stream",
@@ -19,47 +19,41 @@
     "hash",
     "sha1",
     "snapshot",
-    "filesize",
-    "compress",
-    "compression",
-    "gzip",
-    "gunzip"
+    "filesize"
   ],
   "files": [
     "bin/",
-    "lib/",
+    "dist/",
     "license",
     "readme.md"
   ],
   "bin": {
     "sums": "bin/sums"
   },
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test:lint": "standard --verbose | snazzy",
-    "test:unit": "mocha src/**/*.test.js -r babel-register",
+    "test:unit": "mocha --require babel-register 'src/**/*.test.js'",
     "test": "npm-run-all test:*",
-    "build": "rm -rf lib && babel src -d lib --ignore '**/*.test.js' --no-comments --compact",
+    "build": "rm -rf dist && babel src -d dist --ignore '**/*.test.js'",
     "watch": "npm run build -- -w",
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "babel-runtime": "6.18.0",
-    "concat-stream": "1.5.2",
+    "concat-stream": "1.6.0",
     "is-stream": "1.1.0",
-    "through2": "2.0.1",
-    "tmp": "0.0.31"
+    "through2": "2.0.3"
   },
   "devDependencies": {
-    "babel-cli": "6.18.0",
-    "babel-plugin-transform-runtime": "6.15.0",
-    "babel-preset-latest": "6.16.0",
-    "babel-register": "6.18.0",
-    "chai": "3.5.0",
-    "mocha": "3.2.0",
-    "npm-run-all": "3.1.1",
-    "snazzy": "5.0.0",
-    "standard": "8.6.0"
+    "babel-cli": "6.24.1",
+    "babel-plugin-transform-async-to-generator": "6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
+    "babel-register": "6.24.1",
+    "chai": "4.0.2",
+    "mocha": "3.4.2",
+    "npm-run-all": "4.0.2",
+    "snazzy": "7.0.0",
+    "standard": "10.0.2"
   },
   "standard": {
     "globals": [
@@ -68,17 +62,9 @@
     ]
   },
   "babel": {
-    "presets": [
-      "latest"
-    ],
     "plugins": [
-      [
-        "transform-runtime",
-        {
-          "polyfill": false,
-          "regenerator": true
-        }
-      ]
+      "transform-async-to-generator",
+      "transform-es2015-modules-commonjs"
     ]
   }
 }

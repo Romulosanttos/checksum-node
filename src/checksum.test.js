@@ -7,20 +7,13 @@ describe('unit: checksum', () => {
   it('runs with a jpg', async () => {
     const stream = fs.createReadStream(path.resolve(__dirname, '../test/photo.jpg'))
     const res = await checksum(stream)
-    expect(res.sum).to.equal('138107040f82d2c619d660e0b5dff46711f6862a')
-    expect(res.size).to.equal(269883)
-  })
-
-  it('runs with a compressed jpg', async () => {
-    const stream = fs.createReadStream(path.resolve(__dirname, '../test/photo.jpg.gz'))
-    const res = await checksum(stream, { compressed: true })
-    expect(res.sum).to.equal('138107040f82d2c619d660e0b5dff46711f6862a')
-    expect(res.size).to.equal(269883)
+    expect(res.sum).to.equal('b53397f48ead8563b86a817449c5ada8ce3db276')
+    expect(res.size).to.equal(85699)
   })
 
   it('runs with md5 algorithm', async () => {
     const stream = fs.createReadStream(path.resolve(__dirname, '../test/photo.jpg'))
     const res = await checksum(stream, { algorithm: 'md5' })
-    expect(res.sum).to.equal('81239875ca78e5decbc80fd01fedaca3')
+    expect(res.sum).to.equal('7e0d6e76cfb001f73d241fd9ada11573')
   })
 })

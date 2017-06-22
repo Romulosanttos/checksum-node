@@ -1,6 +1,6 @@
 # Sums
 
-[![Build Status](https://travis-ci.org/zab/sums.svg?branch=master)](https://travis-ci.org/zab/sums)
+[![Build Status](https://travis-ci.org/jsonmaur/sums.svg?branch=master)](https://travis-ci.org/jsonmaur/sums)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 A Node library to quickly generate a checksum for multiple types of data. Works well with streams and files.

@@ -73,14 +73,14 @@ async function () {
 
 ## API
 
-#### sums.checksum(stream:Stream, options:Object)
+#### .checksum(stream:Stream, options:Object)
 
 Generate a checksum of a stream.
 
 - `options`
   - `algorithm` The hashing algorithm used to generate checksum (defaults to SHA1)
 
-#### sums.snapshot(files:Array, options:Object)
+#### .snapshot(files:Array, options:Object)
 
 Generate a snapshot of a list of files, which gives a size and checksum for each file, and for all of them together.
 
@@ -89,4 +89,4 @@ Generate a snapshot of a list of files, which gives a size and checksum for each
 
 ## License
 
-[MIT](license) © [Zab](https://zab.io)
+[MIT](license) © [Jason Maurer](http://maur.co)

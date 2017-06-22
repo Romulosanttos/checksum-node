@@ -1,7 +1,7 @@
 {
   "name": "sums",
   "version": "0.2.4",
-  "description": "A checksum generator for Node streams",
+  "description": "A checksum generator for Node",
   "author": "Jason Maurer",
   "license": "MIT",
   "homepage": "https://github.com/jsonmaur/sums#readme",
@@ -19,6 +19,7 @@
     "shasum",
     "hash",
     "sha1",
+    "sha256",
     "md5",
     "snapshot",
     "filesize"

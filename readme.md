@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/zab/sums.svg?branch=master)](https://travis-ci.org/zab/sums)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-A Node library to quickly generate a checksum and size of files and directories. Works with streams as well as multiple files.
+A Node library to quickly generate a checksum for multiple types of data. Works well with streams and files.
 
 ## Install
 
@@ -13,7 +13,7 @@ $ npm install sums
 
 ## Snapshots
 
-Snapshots are simply a list of checksums and sizes for each file specified. It will also include a total size of all files, and a checksum of the snapshot as a whole (e.g. `checksum1:checksum2:checksum3`) to determine if anything in the list of files has changed.
+Snapshots are a list of checksums and sizes for each file specified. It will also include a total size of all the files, and a checksum of the snapshot as a whole (e.g. `sum(checksum1:checksum2:checksum3)`) to determine if anything in the list of files has changed.
 
 ## Getting Started
 
@@ -54,7 +54,7 @@ async function () {
 
 ```javascript
 {
-  sum: '4964d9325c20b20bf531299bb1a9ef4810555d23',
+  sum: 'e178bb2a25115a2cb657f57cbd7906f5f89422ba',
   size: 4470,
   snapshot: [
     {

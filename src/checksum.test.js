@@ -22,4 +22,10 @@ describe('unit: checksum', () => {
     expect(res.sum).to.equal('aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d')
     expect(res.size).to.equal(5)
   })
+
+  it('runs with sha256', async () => {
+    const res = await checksum('hello', { algorithm: 'sha256' })
+    expect(res.sum).to.equal('2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824')
+    expect(res.size).to.equal(5)
+  })
 })

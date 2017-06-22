@@ -1,25 +1,34 @@
-import assert from 'assert'
+import stream from 'stream'
 import crypto from 'crypto'
 import isStream from 'is-stream'
 import concatStream from 'concat-stream'
 import through from 'through2'
 
-export default async function (rstream, opts = {}) {
-  assert(isStream.readable(rstream),
-    'Must pass a readable stream!')
+export default async function (data, opts = {}) {
+  if (!isStream.readable(data)) {
+    const bufferStream = new stream.PassThrough()
+    bufferStream.end(Buffer.from(data))
 
-  let size = 0
+    data = bufferStream
+  }
+
   const getSize = through((chunk, enc, cb) => {
     size += Buffer.byteLength(chunk)
     cb(null, chunk)
   })
 
-  const sum = await new Promise((resolve, reject) => {
-    const algo = opts.algorithm || 'sha1'
-    const hash = crypto.createHash(algo).setEncoding('hex')
+  let size = 0
 
-    rstream.on('error', reject)
-    rstream.pipe(getSize).pipe(hash).pipe(concatStream(resolve))
+  const sum = await new Promise((resolve, reject) => {
+    const hash = crypto
+      .createHash(opts.algorithm || 'sha1')
+      .setEncoding('hex')
+
+    data
+      .on('error', reject)
+      .pipe(getSize)
+      .pipe(hash)
+      .pipe(concatStream(resolve))
   })
 
   return {

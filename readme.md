@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/zab/sums.svg?branch=master)](https://travis-ci.org/zab/sums)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-A Node library to quickly generate checksums of streams and compressed streams. Returns a promise resolving with a checksum of the stream data and the size in bytes. Can also compress a stream using gzip.
+A Node library to quickly generate a checksum and size of files and directories. Works with streams as well as multiple files.
 
 ## Install
 
@@ -11,9 +11,13 @@ A Node library to quickly generate checksums of streams and compressed streams. 
 $ npm install sums
 ```
 
+## Snapshots
+
+Snapshots are simply a list of checksums and sizes for each file specified. It will also include a total size of all files, and a checksum of the snapshot as a whole (e.g. `checksum1:checksum2:checksum3`) to determine if anything in the list of files has changed.
+
 ## Getting Started
 
-##### Generating a checksum
+#### Generating Checksum
 
 ```javascript
 const fs = require('fs')
@@ -25,6 +29,8 @@ async function () {
 }
 ```
 
+###### Example Response
+
 ```javascript
 {
   sum: '7c3af16fe22fcb5f79dcd7cae12cf15cb91150c8',
@@ -32,51 +38,54 @@ async function () {
 }
 ```
 
-##### Compressing a file
+#### Generating Snapshot
 
 ```javascript
-const fs = require('fs')
+const glob = require('glob')
 const sums = require('sums')
 
 async function () {
-  const stream = fs.createReadStream('path-to-something.jpg')
-  return await sums.compress(stream)
+  const files = glob.sync('**/*')
+  return await sums.snapshot(files)
 }
 ```
+
+###### Example Response
 
 ```javascript
 {
-  file: '/var/folders/tb/dsyr2qf50lz4grxc63xqlvd40000gn/T/sums_47909VYt2yM20EE5f.gz',
-  old_size: 269883,
-  new_size: 266862,
-  deflated: '1.1%'
+  sum: '4964d9325c20b20bf531299bb1a9ef4810555d23',
+  size: 4470,
+  snapshot: [
+    {
+      name: 'path/to/file1',
+      sum: '7c3af16fe22fcb5f79dcd7cae12cf15cb91150c8',
+      size: 1070
+    },
+    {
+      name: 'path/to/file2',
+      sum: 'ca5e739f9c39d1a026de2ca31d6e5c50e0b8e24d',
+      size: 3400
+    }
+  ]
 }
-```
-
-##### Using the CLI
-
-```bash
-$ sums [path-to-file]
-```
-
-```bash
-Sum:   7c3af16fe22fcb5f79dcd7cae12cf15cb91150c8
-Size:  1070
 ```
 
 ## API
 
 #### sums.checksum(stream:Stream, options:Object)
 
-Generate a checksum of a stream. Can pass in a gzip compressed file if `compressed` is set to true, and will return the checksum of the *decompressed* version.
+Generate a checksum of a stream.
 
 - `options`
   - `algorithm` The hashing algorithm used to generate checksum (defaults to SHA1)
-  - `compressed` Whether the stream is gzip compressed (will automatically decompress)
 
-#### sums.compress(stream:Stream)
+#### sums.snapshot(files:Array, options:Object)
 
-Will compress a stream using gzip and store in a temporary file.
+Generate a snapshot of a list of files, which gives a size and checksum for each file, and for all of them together.
+
+- `options`
+  - `algorithm` The hashing algorithm used to generate checksum (defaults to SHA1)
 
 ## License
 

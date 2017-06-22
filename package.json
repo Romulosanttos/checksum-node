@@ -15,21 +15,19 @@
   "keywords": [
     "stream",
     "checksum",
+    "sum",
     "shasum",
     "hash",
     "sha1",
+    "md5",
     "snapshot",
     "filesize"
   ],
   "files": [
-    "bin/",
     "dist/",
     "license",
     "readme.md"
   ],
-  "bin": {
-    "sums": "bin/sums"
-  },
   "main": "dist/index.js",
   "scripts": {
     "test:lint": "standard --verbose | snazzy",

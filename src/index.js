@@ -1,4 +1,4 @@
-import { generateChecksum } from '../src/checksum';
+import { generateChecksum } from './checksum';
 import { generateSnapshot } from './snapshot';
 
 module.exports = {

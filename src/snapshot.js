@@ -1,5 +1,5 @@
 import fs from 'fs';
-import checksum from './checksum';
+import {generateChecksum} from './checksum';
 
 export default async function (files, opts = {}) {
 	let size = 0;
@@ -8,7 +8,7 @@ export default async function (files, opts = {}) {
 		files.sort().map((file) => {
 			const stream = fs.createReadStream(file);
 
-			return checksum(stream, opts).then(data => {
+			return generateChecksum(stream, opts).then(data => {
 				size += data.size;
 
 				return {
@@ -20,7 +20,7 @@ export default async function (files, opts = {}) {
 		})
 	);
 
-	const { sum } = await checksum(snapshot
+	const { sum } = await generateChecksum(snapshot
 		.map(s => s.sum)
 		.join(':'));
 

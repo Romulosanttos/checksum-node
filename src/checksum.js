@@ -4,7 +4,7 @@ import isStream from 'is-stream';
 import concatStream from 'concat-stream';
 import through from 'through2';
 
-export default async function (data, opts = {}) {
+export async function generateChecksum (data, opts = {}) {
 	if (!isStream.readable(data)) {
 		const bufferStream = new stream.PassThrough();
 		bufferStream.end(Buffer.from(data));

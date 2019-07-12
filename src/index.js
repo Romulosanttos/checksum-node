@@ -1,7 +1,7 @@
-import checksum from './checksum';
+import { generateChecksum } from '../src/checksum';
 import snapshot from './snapshot';
 
 module.exports = {
-	checksum,
+	generateChecksum,
 	snapshot
 };

@@ -1,6 +1,6 @@
 {
   "name": "checksum-node",
-  "version": "1.0.0",
+  "version": "1.7.0",
   "description": "A checksum for Node",
   "author": {
     "name": "Rômulo Cabral Santos",

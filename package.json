@@ -30,7 +30,8 @@
   ],
   "main": "dist/index.js",
   "scripts": {
-    "test:lint": "standard --verbose | snazzy",
+    "lint-fix": "eslint --fix ./src/",
+    "test:lint": "eslint ./src/",
     "test:unit": "mocha --require babel-register 'src/**/*.test.js'",
     "test": "npm-run-all test:*",
     "build": "rm -rf dist && babel src -d dist --ignore '**/*.test.js'",
@@ -49,15 +50,8 @@
     "babel-register": "6.24.1",
     "chai": "4.0.2",
     "mocha": "3.4.2",
-    "npm-run-all": "4.0.2",
-    "snazzy": "7.0.0",
-    "standard": "10.0.2"
-  },
-  "standard": {
-    "globals": [
-      "describe",
-      "it"
-    ]
+    "eslint": "^6.0.1",
+    "npm-run-all": "4.0.2"
   },
   "babel": {
     "plugins": [

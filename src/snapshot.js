@@ -1,7 +1,7 @@
 import fs from 'fs';
 import {generateChecksum} from './checksum';
 
-export default async function (files, opts = {}) {
+export async function generateSnapshot(files, opts = {}) {
 	let size = 0;
 
 	const snapshot = await Promise.all(

@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
 import { expect } from 'chai';
-import snapshot from '../src/snapshot';
+import {generateSnapshot} from '../src/snapshot';
 
-describe('unit: snapshot', () => {
+describe('unit: generateSnapshot', () => {
 	it('runs with a jpg', async () => {
 		const files = [
 			'assets/photo1.jpg',
 			'assets/photo2.jpg'
 		];
-		expect(await snapshot(files)).to.deep.equal({
+		expect(await generateSnapshot(files)).to.deep.equal({
 			sum: '0fb3afe0fb94399a6c4a863d19534c77c64c5c3d',
 			size: 203735,
 			snapshot: [
@@ -31,7 +31,7 @@ describe('unit: snapshot', () => {
 			'assets/photo1.jpg',
 			'assets/photo2.jpg'
 		];
-		expect(await snapshot(files, { algorithm: 'md5' })).to.deep.equal({
+		expect(await generateSnapshot(files, { algorithm: 'md5' })).to.deep.equal({
 			sum: 'c006c94c4ba83aeb68f3a2b06dd147d679738830',
 			size: 203735,
 			snapshot: [

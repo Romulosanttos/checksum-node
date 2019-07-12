@@ -1,4 +1,4 @@
-# Sums
+# checksum-node
 
 [![Build Status](https://travis-ci.org/jsonmaur/sums.svg?branch=master)](https://travis-ci.org/jsonmaur/sums)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
@@ -8,7 +8,7 @@ A Node library to quickly generate a checksum for multiple types of data. Works 
 ## Install
 
 ```bash
-$ npm install sums
+$ npm install checksum-node
 ```
 
 ## Snapshots
@@ -21,11 +21,11 @@ Snapshots are a list of checksums and sizes for each file specified. It will als
 
 ```javascript
 const fs = require('fs')
-const sums = require('sums')
+const checksum = require('checksum-node')
 
 async function () {
   const stream = fs.createReadStream('path-to-file')
-  return await sums.checksum(stream)
+  return await checksum.generateChecksum(stream)
 }
 ```
 
@@ -46,7 +46,7 @@ const sums = require('sums')
 
 async function () {
   const files = glob.sync('**/*')
-  return await sums.snapshot(files)
+  return await checksum.generateSnapshot(files)
 }
 ```
 
@@ -73,14 +73,14 @@ async function () {
 
 ## API
 
-#### .checksum(stream:Stream, options:Object)
+#### .generateChecksum(stream:Stream, options:Object)
 
 Generate a checksum of a stream.
 
 - `options`
   - `algorithm` The hashing algorithm used to generate checksum (defaults to SHA1)
 
-#### .snapshot(files:Array, options:Object)
+#### .generateSnapshot(files:Array, options:Object)
 
 Generate a snapshot of a list of files, which gives a size and checksum for each file, and for all of them together.
 
@@ -89,4 +89,4 @@ Generate a snapshot of a list of files, which gives a size and checksum for each
 
 ## License
 
-[MIT](license) © [Jason Maurer](http://maur.co)
+UNLICENSED 

@@ -1,14 +1,13 @@
 {
-  "name": "sums",
+  "name": "checksum-node",
   "version": "1.0.0",
-  "description": "A checksum generator for Node",
-  "author": "Jason Maurer",
-  "license": "MIT",
-  "homepage": "https://github.com/jsonmaur/sums#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jsonmaur/sums.git"
+  "description": "A checksum for Node",
+  "author": {
+    "name": "Rômulo Cabral Santos",
+    "url": "http://romulosanttos.github.io",
+    "email": "romulosanttos1@gmail.com"
   },
+  "license": "UNLICENSED",
   "engines": {
     "node": ">=6"
   },

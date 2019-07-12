@@ -3,32 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.generateChecksum = undefined;
 
-var _stream = require('stream');
-
-var _stream2 = _interopRequireDefault(_stream);
-
-var _crypto = require('crypto');
-
-var _crypto2 = _interopRequireDefault(_crypto);
-
-var _isStream = require('is-stream');
-
-var _isStream2 = _interopRequireDefault(_isStream);
-
-var _concatStream = require('concat-stream');
-
-var _concatStream2 = _interopRequireDefault(_concatStream);
-
-var _through = require('through2');
-
-var _through2 = _interopRequireDefault(_through);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-exports.default = (() => {
+let generateChecksum = exports.generateChecksum = (() => {
 	var _ref = _asyncToGenerator(function* (data, opts = {}) {
 		if (!_isStream2.default.readable(data)) {
 			const bufferStream = new _stream2.default.PassThrough();
@@ -56,7 +33,31 @@ exports.default = (() => {
 		};
 	});
 
-	return function (_x) {
+	return function generateChecksum(_x) {
 		return _ref.apply(this, arguments);
 	};
 })();
+
+var _stream = require('stream');
+
+var _stream2 = _interopRequireDefault(_stream);
+
+var _crypto = require('crypto');
+
+var _crypto2 = _interopRequireDefault(_crypto);
+
+var _isStream = require('is-stream');
+
+var _isStream2 = _interopRequireDefault(_isStream);
+
+var _concatStream = require('concat-stream');
+
+var _concatStream2 = _interopRequireDefault(_concatStream);
+
+var _through = require('through2');
+
+var _through2 = _interopRequireDefault(_through);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }

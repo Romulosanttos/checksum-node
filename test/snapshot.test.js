@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { expect } from 'chai';
-import snapshot from './snapshot';
+import snapshot from '../src/snapshot';
 
 describe('unit: snapshot', () => {
 	it('runs with a jpg', async () => {

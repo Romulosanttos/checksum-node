@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import fs from 'fs';
 import path from 'path';
-import checksum from './checksum';
+import checksum from '../src/checksum';
 
 describe('unit: checksum', () => {
 	it('runs with a jpg', async () => {
